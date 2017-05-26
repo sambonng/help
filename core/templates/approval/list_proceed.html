@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>결재진행목록</h2>
+<hr style="margin:10px">
+<div class="row">
+    <table class="table">
+		<thead>
+			<tr>
+				<th>가</th>
+				<th>나</th>
+				<th>다</th>
+			</tr>
+		</thead>
+        <tbody>
+            {% for item in proceed_appr %}
+        	<tr>
+        		<td>{{ item.counsel.soldier.name }}</td>
+        		<td>{{ item.counsel.date }}</td>
+                <td>
+                    <button type="button" class="btn btn-default">현황보기</button>
+                </td>
+        	</tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

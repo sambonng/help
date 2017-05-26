@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    #top {
+        height: 200px;
+    }
+    #left, #right {
+        width:48%;
+        height: 200px;
+    }
+    #left { float: left; }
+    #right { float: right; }
+</style>
+
+<h2 class="hidden-xs-down">도움·배려병사 관리체계에 오신 것을 환영합니다!</h2>
+<hr style="margin:10px">
+<div id="top" class="panel panel-default">
+    <div class="panel-heading" style="height:40px">
+        <h3 class="panel-title" style="float:left">병사현황</h3>
+        <a href="{% url 'approval_req_list' %}" style="float:right">
+            <small>+more</small>
+        </a>
+    </div>
+    <div class="panel-body">
+        <ul>
+            {% for soldier in soldier_list %}
+            <li><a href="{% url 'soldier-detail' soldier.id %}">
+                {{ soldier.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div id="left" class="panel panel-default">
+    <div class="panel-heading" style="height:40px">
+        <h3 class="panel-title" style="float:left">결재대기목록</h3>
+        <a href="{% url 'approval_proceed_list' %}" style="float:right">
+            <small>+more</small>
+        </a>
+    </div>
+    <div class="panel-body">
+        <ul>
+            {% for item in completed %}
+            <li><a href="javascript:openDetail('{% url 'approval-detail-non-approve' item.id %}');">
+                {{ item.counsel.soldier.name }} {{item.created }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div id="right" class="panel panel-default">
+    <div class="panel-heading" style="height:40px">
+        <h3 class="panel-title" style="float:left">공지사항</h3>
+        <a href="{% url 'approval_completed_list' %}" style="float:right">
+            <small>+more</small>
+        </a>
+    </div>
+    <div class="panel-body">
+        <ul>
+            {% for announcement in announcement_imp %}
+            <li><a href="'{% url 'announcement-detail' announcement.id %}">
+                <strong>{{ announcement.title }} {{item.created }}</strong></a></li>
+            {% endfor %}
+            {% for announcement in announcement_list %}
+            <li><a href="'{% url 'announcement-detail' announcement.id %}">
+                {{ announcement.title }} {{item.created }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

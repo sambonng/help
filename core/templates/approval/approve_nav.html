@@ -1,0 +1,23 @@
+{% extends 'approval/detail_popup.html' %}
+
+{% block content %}
+<tr>
+    <td class="pull-right" id="header">
+        <form method="post" style="display:inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-info btn-sm" name="btn" value="approve">결재</button><span> </span>
+            <button type="submit" class="btn btn-danger btn-sm" name="btn" value="dismiss">기각</button><span> </span>
+        </form>
+        <button type="button" class="btn btn-default btn-sm" onclick="window.open('', '_self', ''); window.close();">닫기</button>
+    </td>
+</tr>
+
+<script>
+    function onSubmit(){
+        opener.location.reload();
+        this.submit();
+        window.close();
+    }
+</script>
+
+{% endblock %}

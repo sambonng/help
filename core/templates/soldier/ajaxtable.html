@@ -1,0 +1,30 @@
+
+
+<table class="table table-fixed" style="border: 1px solid #CCC">
+    <thead>
+        <tr>
+            <th class="col-xs-2">이름</th>
+            <th class="col-xs-7">부서</th>
+            <th class="col-xs-2">직책</th>
+            <th class="col-xs-1">선택</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td class="col-xs-2">{{ user.profile.name }}</td>
+            <td class="col-xs-7">{{ user.profile.department }}</td>
+            <td class="col-xs-2">{{ user.profile.position }}</td>
+            <td class="col-xs-1">
+                <form action="{% url 'soldier-enroll-user' pk %}" method="post" style="text-align:center">
+                {% csrf_token %}
+                <input type="hidden" name='userid' value={{ user.id }} />
+                <a class="btn btn-default btn-sm"
+                   onclick="confirm('{{user.profile.name}} 님을 등록하시겠습니까?')?this.parentElement.submit():null;">
+                    선택
+                </a>
+            </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

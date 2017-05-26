@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .btn {
+        border-radius: 5px;
+        outline: none !important;
+    }
+    .btn hover {
+        border-color: #787878;
+    }
+    .tag {
+		width: 100px;
+        text-align: left;
+        font-weight: bold;
+    }
+    .text {
+        height: 200px;
+        margin: 0.5px;
+        padding: 5px;
+        border: 1px solid #DFDFDF;
+        border-radius: 5px;
+    }
+</style>
+
+<h2>병사정보</h2>
+<br>
+<div class="panel panel-info">
+        <div class=" col-md-9 col-lg-9 ">
+            <table class="table table-user-information">
+                <tbody>
+                    <tr>
+                        <td class="tag">면담일</td>
+                        <td>{{ counsel.date|date:"Y년 m월 d일"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="tag">면담내용</td>
+                        <td><div class="text">{{ counsel.contents }}</div></td>
+                    </tr>
+                    <tr>
+                        <td class="tag">조치사항</td>
+                        <td><div class="text">{{ counsel.plan }}</div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+
+{% endblock %}

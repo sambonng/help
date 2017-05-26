@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    #top {
+        height: 200px;
+    }
+    #left, #right {
+        width:48%;
+        height: 200px;
+    }
+    #left { float: left; }
+    #right { float: right; }
+</style>
+
+<h2>결재관리</h2>
+<hr style="margin:10px">
+<div id="top" class="panel panel-default">
+    <div class="panel-heading" style="height:40px">
+        <h3 class="panel-title" style="float:left">결재수신현황</h3>
+        <a href="{% url 'approval_req_list' %}" style="float:right">
+            <small>+more</small>
+        </a>
+    </div>
+    <div class="panel-body">
+        <ul>
+            {% for item in approval_req %}
+            <li><a href="javascript:openDetail('{% url 'approval-detail-approve' item.approval.id %}');">
+                {{ item.approval.counsel.soldier.name }} {{ item.created }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div id="left" class="panel panel-default">
+    <div class="panel-heading" style="height:40px">
+        <h3 class="panel-title" style="float:left">결재진행목록</h3>
+        <a href="{% url 'approval_proceed_list' %}" style="float:right">
+            <small>+more</small>
+        </a>
+    </div>
+    <div class="panel-body">
+        <ul>
+            {% for item in proceed %}
+            <li><a href="javascript:openDetail('{% url 'approval-detail-non-approve' item.id %}');">
+                {{ item.counsel.soldier.name }} {{item.created }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div id="right" class="panel panel-default">
+    <div class="panel-heading" style="height:40px">
+        <h3 class="panel-title" style="float:left">결재완료목록</h3>
+        <a href="{% url 'approval_completed_list' %}" style="float:right">
+            <small>+more</small>
+        </a>
+    </div>
+    <div class="panel-body">
+        <ul>
+            {% for item in completed %}
+            <li><a href="javascript:openDetail('{% url 'approval-detail-non-approve' item.id %}');">
+                {{ item.counsel.soldier.name }} {{item.created }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+	function openDetail(url){
+        window.open(url,"","width=800,height=600,");
+    }
+</script>
+{% endblock %}

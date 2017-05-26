@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script>
+	jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
+
+<h2>병사현황</h2>
+<hr style="margin:5px">
+<div style="padding:5px">
+    <a class="btn btn-default" style="margin-left:535px" href="{% url 'soldier-create' %}">병사 등록하기</a>
+</div>
+<div class="panel panel-default">
+        <div class="table-container">
+            <table class="table table-filter table-hover">
+                <tbody>
+                    {% for soldier in soldiers %}
+                    <tr class='clickable-row' data-href="{% url 'soldier-detail' soldier.id %}">
+                        <td>
+                            <div class="media">
+                                <a href="#" class="pull-left">
+                                    <img src="{{MEDIA_URL}}{{soldier.image}}" width="150px" height="200px" class="img-responsive img-thumbnail">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="title">
+                                        {{ soldier.name }}
+                                        <span class="pull-right">병 {{ soldier.nth }}기</span>
+                                    </h4>
+                                    <p class="summary">{{ soldier.department }}</p><br>
+                                    <p class="summary">☎ {{ soldier.phone_num }}</p>
+                                    <span class="media-meta pull-right">마지막 수정일: {{ soldier.modified|date:"Y년 m월 d일" }}</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

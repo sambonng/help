@@ -1,0 +1,67 @@
+
+body {font-family: 'Jeju Gothic', sans-serif;}
+
+html {
+  position: relative;
+}
+.panel-info{
+    width: 700px;
+    margin: auto;
+}
+.btn {
+    border-radius:  5px;
+    outline:  none !important;
+}
+.btn hover {
+    border-color: #787878;
+}
+.tag {
+    width: 100px;
+    text-align: left;
+    font-weight: bold;
+}
+.text {
+    height: 200px;
+    margin: 0.5px;
+    padding: 5px;
+    border: 1px solid #DFDFDF;
+    border-radius: 5px;
+}
+.maintable {
+  border-collapse: collapse;
+  width: 800px;
+  margin: 0 0;
+}
+
+.maintable tr {
+  border: 1px solid #CCC;
+}
+#header {
+  padding: 10px 5px;
+}
+
+#title, #search {
+  padding: 10px 20px;
+  vertical-align: center;
+
+}
+
+.inline {
+  display: inline;
+}
+#approval-table{
+    margin: 10px 50px 10px 350px;
+    border: 0;
+}
+#approval-table tr td{
+    border: 1px solid black;
+}
+#approval-table td{
+    width: 80px;
+}
+#approval-table .head{
+    height: 25px;
+}
+#approval-table .body{
+    height: 65px;
+}

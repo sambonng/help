@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .btn {
+        border-radius: 5px;
+        outline: none !important;
+    }
+    .btn hover {
+        border-color: #787878;
+    }
+    .tag {
+		width: 100px;
+        text-align: left;
+        font-weight: bold;
+    }
+    .text {
+        height: 200px;
+        margin: 0.5px;
+        padding: 5px;
+        border: 1px solid #DFDFDF;
+        border-radius: 5px;
+    }
+    .buttons {
+        height:50px;
+    }
+</style>
+
+    <h3>{{ announcement.title }}</h3>
+
+    <div class="buttons">
+        {% if auth %}
+        <form action="{% url 'announcement-delete' announcement.id %}" method="post" >
+            {% csrf_token %}
+            <a class="btn btn-default pull-right" href="#" onclick="confirm('Do you want to delete this?')?this.parentElement.submit():null;">삭제</a>
+        </form>
+        <a class="btn btn-default pull-right" href="{% url 'announcement-update' announcement.id %}">수정</a>
+        {% endif %}
+    </div>
+    <div class="panel panel-info">
+        <div class="col-md-12">
+
+        <table class="table table-user-information">
+            <tbody>
+                <tr>
+                    <td class="tag">작성자</td>
+                    <td>{{ announcement.user.profile.get_rank_display }} {{ announcement.user.profile.name }}</td>
+                </tr>
+                <tr>
+                    <td class="tag">작성일</td>
+                    <td>{{ announcement.created|date:"Y년 m월 d일 f"}}</td>
+                </tr>
+                <tr>
+                    <td class="tag">내용</td>
+                    <td><div class="text">{{ announcement.contents }}</div></td>
+                </tr>
+                <tr>
+                    {% if announcement.attached %}
+                    <td class="tag">첨부파일</td>
+                    <td><p><a href="{{ announcement.attached.url }}">{{ announcement.attached }}</a></p></td>
+
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+        <p class="pull-right"><a href="{% url 'announcement-list' %}">목록으로</a></p>
+{% endblock %}

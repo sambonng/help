@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    textarea.form-control {
+      height: 500%;
+    }
+    #approval-table {
+        width: 450px;
+        height: 100px;
+        margin-right: 10px;
+    }
+    #approval-table tr, td {
+        border: 1px solid #CCC;
+        text-align: center;
+        width: 90px;
+    }
+    #approval-table #head td {
+    	height: 25px;
+    }
+
+</style>
+
+<h2 class="page-header">공지사항 작성하기</h2>
+<div class="row">
+    <form id="counselForm" class="form-horizontal" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="col-lg-2 control-label">제목</label>
+            <div class="col-lg-6">
+                <input class="form-control" name="title" type="text" value="{{ form.title.value|default_if_none:"" }}"/>
+            </div>
+            <input name="importance" type="checkbox">중요설정
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">내용</label>
+            <div class="col-lg-8">
+                <textarea class="form-control" name="contents" rows="12">{{ form.contents.value|default_if_none:"" }}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">첨부파일</label>
+            <div class="col-lg-3">
+                <input name="attached" type="file" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+                <button class="btn btn-primary" type="button" onclick="setapproval()">&nbsp;&nbsp;등록&nbsp;&nbsp;</button>
+                <span></span>
+                <a class="btn btn-default" href="{% url 'announcement-list' %}">&nbsp;&nbsp;취소&nbsp;&nbsp;</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+	var setapproval = function(){
+        var f = document.getElementById('counselForm');
+        if( f.title.value=="" || f.contents.value==""){
+            alert("입력칸이 비어있습니다.");
+            if(f.date.value == ""){
+                return f.date.focus();
+            }
+            if(f.contents.value == ""){
+                return f.contents.focus();
+            }
+            if(f.plan.value == ""){
+                return f.plan.focus();
+            }
+        }
+        else{
+            f.submit();
+        }
+    }
+</script>
+{% endblock %}

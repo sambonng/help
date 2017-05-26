@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>결재완료목록</h2>
+<hr style="margin:10px">
+<div class="row">
+    <table class="table">
+		<thead>
+			<tr>
+				<th>병사 이름</th>
+				<th>면담일</th>
+                <th>면담자</th>
+                <th>결재여부</th>
+				<th>결재현황보기</th>
+			</tr>
+		</thead>
+        <tbody>
+            {% for item in completed_appr %}
+        	<tr>
+        		<td>{{ item.counsel.soldier.name }}</td>
+        		<td>{{ item.counsel.date|date:"Y년 m월 d일" }}</td>
+                <td>{{ item.counsel.user.profile.get_rank_display }} {{ item.counsel.user.profile.name }}</td>
+                <td>{{ item.is_approved|yesno:"결재,기각" }}</td>
+                <td><button type="button" onclick="openStatus('{% url 'approval-status' item.id %}')" class="btn btn-default">현황보기</button>
+                </td>
+        	</tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

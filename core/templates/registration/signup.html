@@ -1,0 +1,75 @@
+{% extends 'registration/base_nav.html' %}
+
+{% block content %}
+<div class="board">
+
+	<h2>회원가입</h2>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            {% for error in form.username.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            <input type="text" name="username" placeholder="아이디" style="width:30rem;"/>
+            <small style="color: gray">150자 내의 영어 대,소문자와 @/./+/-/_만을 사용하여 작성해 주십시오.</small>
+        </p>
+        <p>
+            {% for error in form.password1.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            <input type="password" name="password1" placeholder="비밀번호" style="width:30rem;"/>
+            <small style="color: gray">6~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.</small>
+        </p>
+        <p>
+            {% for error in form.password2.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            <input type="password" name="password2" placeholder="비밀번호 확인" style="width:30rem;"/>
+            <small style="color: gray">동일한 비밀번호를 입력해 주십시오.</small>
+        </p>
+		<p>
+            {% for error in form.name.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            <select name="rank" style="width:80px;height:30px">
+                <option value="" disabled selected>계급</option>
+                {% for choice in form.rank.field.choices %}
+                <option value={{choice.0}}>{{choice.1}}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            {% for error in form.name.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            <input type="text" name="name" placeholder="이름" style="width:30rem;"/>
+            <small style="color: gray">필수 정보입니다.</small>
+        </p>
+        <p>
+            {% for error in form.department.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            <input type="text" name="department" placeholder="소속" style="width:45rem;"/>
+            <small style="color: gray">필수 정보입니다. 반드시 상세히 기록해 주십시오.</small>
+        </p>
+        <p>
+            {% for error in form.position.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            <input type="text" name="position" placeholder="직책" style="width:30rem;"/>
+            <small style="color: gray">필수 정보입니다.</small>
+        </p>
+        <p>
+            {% for error in form.phone_num.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            <input type="text" name="phone_num" placeholder="연락처" style="width:30rem;"/>
+            <small style="color: gray">필수정보입니다. -를 제외한 숫자만 작성해 주십시오.</small>
+        </p>
+        <hr>
+        <button class="btn btn-submit full-width" type="submit">가입하기</button>
+
+    </form>
+</div>
+{% endblock %}

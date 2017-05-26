@@ -1,0 +1,67 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet" />
+    <style>
+        body {font-family: 'Jeju Gothic', sans-serif;
+        }
+        table td, th {
+            text-align: center;
+        }
+    </style>
+
+    <!-- scripts loaded here -->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+  </head>
+  <body>
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                  <th class="col-xs-1">결재순서</th>
+                  <th class="col-xs-3">직책</th>
+                  <th class="col-xs-3">이름</th>
+                  <th class="col-xs-3">결재여부</th>
+              </tr>
+          </thead>
+          <tbody>
+          	<tr>
+          		<td class="col-xs-1">1</td>
+          		<td class="col-xs-3">{{ n1.user.profile.position }}</td>
+          		<td class="col-xs-3">{{ n1.user.profile.name }}</td>
+                <td class="col-xs-3">{{ n1.is_approved|yesno:"결재완료," }}</td>
+          	</tr>
+          	<tr>
+          		<td class="col-xs-1">2</td>
+          		<td class="col-xs-3">{{ n2.user.profile.position }}</td>
+          		<td class="col-xs-3">{{ n2.user.profile.name }}</td>
+                <td class="col-xs-3">{{ n2.is_approved|yesno:"결재완료," }}</td>
+          	</tr>
+          	<tr>
+          		<td class="col-xs-1">3</td>
+          		<td class="col-xs-3">{{ n3.user.profile.position }}</td>
+          		<td class="col-xs-3">{{ n3.user.profile.name }}</td>
+                <td class="col-xs-3">{{ n3.is_approved|yesno:"결재완료," }}</td>
+          	</tr>
+          	<tr>
+          		<td class="col-xs-1">4</td>
+          		<td class="col-xs-3">{{ n4.user.profile.position }}</td>
+          		<td class="col-xs-3">{{ n4.user.profile.name }}</td>
+                <td class="col-xs-3">{{ n4.is_approved|yesno:"결재완료," }}</td>
+          	</tr>
+          	<tr>
+          		<td class="col-xs-1">5</td>
+          		<td class="col-xs-3">{{ n5.user.profile.position }}</td>
+          		<td class="col-xs-3">{{ n5.user.profile.name }}</td>
+                <td class="col-xs-3">{{ n5.is_approved|yesno:"결재완료," }}</td>
+          	</tr>
+          </tbody>
+      </table>
+    </body>
+</html>

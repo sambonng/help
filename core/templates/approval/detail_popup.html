@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title>결재자 지정</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/detail_popup.css' %}" />
+    <link href="https://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<table class="maintable">
+    {% block content %}
+    {% endblock %}
+    <tr class="no-line">
+    	<td>
+            <button type="button" class="buttn btn btn-default pull-right" style="margin:10px;width:100px;"
+                    onclick="openStatus('{% url 'approval-status' approval.id %}')">
+                결재현황
+            </button>
+    	</td>
+    </tr>
+    <tr class="no-line">
+        <td>
+            <div class="panel panel-info">
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td class="tag">면담일</td>
+                            <td>{{ counsel.date|date:"Y년 m월 d일" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="tag">면담내용</td>
+                            <td><div class="text">{{ counsel.contents }}</div></td>
+                        </tr>
+                        <tr>
+                            <td class="tag">조치사항</td>
+                            <td><div class="text">{{ counsel.plan }}</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script>
+    function openStatus(url){
+        window.open(url,"test","width=750,height=230");
+    }
+</script>
+
+</body>
+</html>

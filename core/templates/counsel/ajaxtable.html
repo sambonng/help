@@ -1,0 +1,36 @@
+<table class="table" id="search-table">
+    <thead>
+        <tr>
+            <th>이름</th>
+            <th>소속</th>
+            <th>직책</th>
+            <th>선택</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td id-data={{ user.id }}>{{ user.profile.name }}</td>
+            <td>{{ user.profile.department}}</td>
+            <td>{{ user.profile.position}}</td>
+            <td><button class="btn btn-info tr-btn">선택
+            </button></td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <td>엄석대</td>
+            <td>교육사 훈련단 신병1대대 통제실</td>
+            <td>한센병</td>
+            <td><button class="btn btn-info tr-btn">선택
+            </button></td>
+        </tr>
+        <tr>
+            <td>박용수</td>
+            <td>교육사 기지전대 수송대대 수송중대</td>
+            <td>운전병</td>
+            <td><button class="btn btn-info tr-btn" >선택
+            </button></td>
+        </tr>
+    </tbody>
+</table>
+

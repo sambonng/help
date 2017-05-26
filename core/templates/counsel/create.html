@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    textarea.form-control {
+      height: 500%;
+    }
+    #approval-table {
+        width: 450px;
+        height: 100px;
+        margin-right: 10px;
+    }
+    #approval-table tr, td {
+        border: 1px solid #CCC;
+        text-align: center;
+        width: 90px;
+    }
+    #approval-table #head td {
+    	height: 25px;
+    }
+
+</style>
+<div class="container">
+    <h1 class="page-header">면담 등록하기</h1>
+    <div class="row">
+        <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+            <form id="counselForm" class="form-horizontal" method="post">
+                {% csrf_token %}
+                <div>
+                    <input type="hidden" name="n1" id="n1" value=""/>
+                    <input type="hidden" name="n2" id="n2" value=""/>
+                    <input type="hidden" name="n3" id="n3" value=""/>
+                    <input type="hidden" name="n4" id="n4" value=""/>
+                    <input type="hidden" name="n5" id="n5" value=""/>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">면담일</label>
+                    <div class="col-lg-3">
+                        <input class="form-control" name="date" type="date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">면담내용</label>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" name="contents" rows="8"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">조치사항</label>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" name="plan" rows="8"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">첨부파일</label>
+                    <div class="col-lg-3">
+                        <input name="attached" type="file"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                        <button class="btn btn-primary" type="button" onclick="setapproval()">&nbsp;&nbsp;등록&nbsp;&nbsp;</button>
+                        <span></span>
+                        <a class="btn btn-default" href="{% url 'soldier-list' %}">&nbsp;&nbsp;취소&nbsp;&nbsp;</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+	var setapproval = function(){
+        var f = document.getElementById('counselForm');
+        if( f.date.value=="" || f.contents.value=="" || f.plan.value==""){
+            alert("입력칸이 비어있습니다.");
+            if(f.date.value == ""){
+                return f.date.focus();
+            }
+            if(f.contents.value == ""){
+                return f.contents.focus();
+            }
+            if(f.plan.value == ""){
+                return f.plan.focus();
+            }
+        }
+        else {
+            window.open("{% url 'counsel-create-popup' pk %}", "", "width=1000,height=600");
+        }
+    }
+</script>
+{% endblock %}

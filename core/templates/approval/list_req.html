@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>결재수신현황</h2>
+<hr style="margin:10px">
+<div class="row">
+    <button type="button" class="btn btn-outline-primary pull-right" onclick="openLastApproval()">
+        이전 결재이력 보기</button>
+    <table class="table">
+		<thead class="thead-inverse">
+			<tr>
+				<th>가</th>
+				<th>나</th>
+				<th>다</th>
+			</tr>
+		</thead>
+        <tbody>
+            {% for item in approval_req %}
+        	<tr>
+        		<td>{{ item.approval.counsel.user.profile.name }}</td>
+        		<td>{{ item.approval.counsel.soldier.name }}</td>
+        		<td>{{ item.approval.counsel.date }}</td>
+                <td>
+                    <button type="button" class="btn btn-default">현황보기</button>
+                </td>
+        	</tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+	function openLastApproval() {
+        window.open("{% url 'approval-last-approved' request.user.id %}", "", "width=800px,height=500px");
+    }
+</script>
+{% endblock %}

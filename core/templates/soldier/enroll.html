@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .table-fixed thead {
+      width: 97%;
+    }
+    .table-fixed tbody {
+      height: 200px;
+      overflow-y: auto;
+      width: 100%;
+    }
+    .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+      display: block;
+    }
+    .table-fixed tbody td, .table-fixed thead > tr> th {
+      float: left;
+      border-bottom-width: 0;
+    }
+    .table-fixed thead tr th{
+    }
+</style>
+
+
+<h2>관리자 추가하기</h2>
+<hr>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>이름으로 검색</h4>
+            <form action="#" method="get" accept-charset="utf-8">
+                <div class="input-group">
+                    <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+                    <input class="form-control" autofocus="" name="name" id="user-search" placeholder="Search for" required>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                    </span>
+                </div>
+                <input type="text" style="width 0px; visibility: hidden;">
+            </form>
+        </div>
+    </div>
+    <div id="result">
+        {% include 'soldier/ajaxtable.html' %}
+    </div>
+    <div class="panel panel-default">
+        <table class="table table-fixed table-hover">
+            <thead>
+                <tr>
+                    <th class="col-xs-2">이름</th>
+                    <th class="col-xs-6">부서</th>
+                    <th class="col-xs-2">직책</th>
+                    <th class="col-xs-2">삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+            	{% for cur_user in cur_users %}
+                <tr>
+                    <td class="col-xs-2">{{ cur_user.profile.name }}</td>
+                    <td class="col-xs-6">{{ cur_user.profile.department }}</td>
+                    <td class="col-xs-2">{{ cur_user.profile.position }}</td>
+                    <td class="col-xs-2">
+                    <form style="text-align:center">
+                    {% csrf_token %}
+                        <a class="btn btn-danger btn-sm">삭제</a>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $("#user-search").change(function () {
+        var name = $(this).val();
+        $.get("{% url 'user-search' pk %}", {name: name}, function(data){
+            $('#result').html(data);
+      });
+    });
+</script>
+{% endblock %}

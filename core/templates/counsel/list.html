@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script>
+	jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
+
+
+<h2>면담목록</h2>
+<hr style="margin: 0 0">
+<a style="margin: 5px 0" class="btn btn-default pull-right" href="{% url 'counsel-create' pk %}">면담 등록하기</a>
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+          <th style="width:5rem;text-align:center;">No.</th>
+          <th style="width:50rem;text-align:center;">제목</th>
+          <th style="width:5rem;text-align:center;">면담자</th>
+          <th style="width:5rem;text-align:center;">작성일</th>
+        </tr>
+	</thead>
+    <tbody>
+        {% for counsel in counsels %}
+    	 <tr class='clickable-row' data-href="{% url 'counsel-detail' pk counsel.id %}">
+            <td style="width:5rem;text-align:center;">{{ counsel.id }}</td>
+            <td style="width:25rem;text-align:center;">{{ counsel.date|date:"Y년 m월 d일" }}의 면담</td>
+            <td style="width:20rem;text-align:center;">{{ counsel.user.profile.name }}</td>
+            <td style="width:20rem;text-align:center;">{{ counsel.created|date:"Y-m-d" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if counsels.has_other_pages %}
+  <ul class="pagination">
+    {% if counsels.has_previous %}
+      <li><a href="?page={{ counsels.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in counsels.paginator.page_range %}
+      {% if counsels.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if counsels.has_next %}
+      <li><a href="?page={{ counsels.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .btn {
+        border-radius  5px;
+        outline:  none !important;
+    }
+    .btn hover {
+        border-color: #787878;
+    }
+    .tag {
+		width: 100px;
+        text-align: left;
+        font-weight: bold;
+    }
+    .text {
+        height: 200px;
+        margin: 0.5px;
+        padding: 5px;
+        border: 1px solid #DFDFDF;
+        border-radius: 5px;
+    }
+    img {
+        margin-left: 10px;
+    }
+</style>
+
+<h2>병사정보</h2>
+<hr>
+<div class="panel panel-info">
+    <div class="panel-body">
+        <div class="button-group pull-right">
+            {% if auth %}
+            <a class="btn btn-warning btn-md" href="{% url 'soldier-enroll-user' soldier.id %}">&nbsp;&nbsp;&nbsp;관리자추가하기&nbsp;&nbsp;&nbsp;</a>
+            {% endif %}
+            <a class="btn btn-primary btn-md" href="{% url 'soldier-update' soldier.id %}">&nbsp;&nbsp;&nbsp;정보수정하기&nbsp;&nbsp;&nbsp;</a>
+            <a class="btn btn-success btn-md" href="{% url 'counsel-list' soldier.id %}">&nbsp;&nbsp;&nbsp;면담목록보기&nbsp;&nbsp;&nbsp;</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-lg-3 " align="center">
+            <br>
+            <img src="{{MEDIA_URL}}{{soldier.image}}" class="img-responsive img-thumbnail">
+        </div>
+    <div class=" col-md-9 col-lg-9 ">
+        <table class="table table-user-information">
+            <tbody>
+                <tr>
+                    <td class="tag">이름</td>
+                    <td>{{ soldier.name }}</td>
+                    </tr>
+                <tr>
+                    <td class="tag">소속</td>
+                    <td>{{ soldier.department }}</td>
+                </tr>
+                <tr>
+                    <td class="tag">기수</td>
+                    <td>병 {{ soldier.nth }}기</td>
+                </tr>
+                <tr>
+                    <td class="tag">군번</td>
+                    <td>{{ detail.service_num }}</td>
+                </tr>
+                <tr>
+                    <td class="tag">특기</td>
+                    <td>{{ detail.major }}</td>
+                </tr>
+                <tr>
+                    <td class="tag">생년월일</td>
+                    <td>{{ detail.birth|date:"Y년 m월 d일"}}</td>
+                </tr>
+                <tr>
+                    <td class="tag">☎사무실</td>
+                    <td>{{ soldier.phone_num }}</td>
+                </tr>
+                <tr>
+                    <td class="tag">비상 연락망</td>
+                    <td>{{ detail.emergency_contact }}</td>
+                </tr>
+                <tr>
+                    <td class="tag">가족관계</td>
+                    <td><div class="text">{{ detail.family_info }}</div></td>
+                </tr>
+                <tr>
+                    <td class="tag">학력</td>
+                    <td><div class="text">{{ detail.education }}</div></td>
+                </tr>
+                <tr>
+                    <td class="tag">과거병력</td>
+                    <td><div class="text">{{ detail.last_desease }}</div></td>
+                </tr>
+                <tr>
+                    <td class="tag">초도면담</td>
+                    <td><div class="text">{{ detail.first_counsel }}</div></td>
+                </tr>
+                <tr>
+                    <td class="tag">향후계획</td>
+                    <td><div class="text">{{ detail.plan }}</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

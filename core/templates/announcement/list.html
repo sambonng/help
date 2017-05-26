@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script>
+	jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+</script>
+
+
+<h2>공지사항</h2>
+<a class="btn btn-default pull-right" href="{% url 'announcement-create' %}">작성하기</a>
+ <br /><br />
+<table class="table table-hover">
+    <thead>
+        <tr>
+          <th style="width:5rem;text-align:center;">No.</th>
+          <th style="width:50rem;text-align:center;">제목</th>
+          <th style="width:5rem;text-align:center;">작성자</th>
+          <th style="width:5rem;text-align:center;">작성일</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for announcement in announcements_imp %}
+         <tr class='clickable-row' data-href="{% url 'announcement-detail' announcement.id %}">
+            <td style="width:5rem;text-align:center;"><strong>공지</strong></td>
+            <td style="width:30rem;text-align:center;"><strong>{{ announcement.title }}</strong></td>
+            <td style="width:20rem;text-align:center;"><strong>
+                {{ announcement.user.profile.get_rank_display }} {{ announcement.user.profile.name }}
+                </strong></td>
+            <td style="width:15rem;text-align:center;"><strong>{{ announcement.created|date:"m-d" }}</strong></td>
+        </tr>
+        {% endfor %}
+
+        {% for announcement in announcements %}
+         <tr class='clickable-row' data-href="{% url 'announcement-detail' announcement.id %}">
+            <td style="width:5rem;text-align:center;">{{ announcement.id }}</td>
+            <td style="width:30rem;text-align:center;">{{ announcement.title }}</td>
+            <td style="width:20rem;text-align:center;">
+                {{ announcement.user.profile.get_rank_display }} {{ announcement.user.profile.name }}
+             </td>
+            <td style="width:15rem;text-align:center;">{{ announcement.created|date:"m-d" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pull-right">
+    <form id="searchform" method="get" accept-charset="utf-8">
+        <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+        <button class="searchbutton" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+</div>
+
+{% if announcements.has_other_pages %}
+  <ul class="pagination">
+    {% if announcements.has_previous %}
+      <li><a href="?page={{ announcements.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in announcements.paginator.page_range %}
+      {% if announcements.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if announcements.has_next %}
+      <li><a href="?page={{ announcements.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,74 @@
+html, body {
+    background-color: #3aa9e8;
+}
+
+/*
+Inspired by http://dribbble.com/shots/917819-iPad-Calendar-Login?list=shots&sort=views&timeframe=ever&offset=461
+*/
+
+.jumbotron {
+	text-align: center;
+	width: 30rem;
+    height: 40rem;
+	border-radius: 0.5rem;
+	top: 15rem;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	margin: 4rem auto;
+	background-color: #fff;
+	padding: 2rem;
+}
+
+.box {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin-bottom: 3rem;
+	margin-left: 3rem;
+	margin-right: 3rem;
+}
+
+.board {
+    background-color: white;
+    width: 80rem;
+    border-radius: 0.5rem;
+    margin: 4rem auto;
+    padding: 2rem;
+}
+
+input {
+	width: 100%;
+	margin-bottom: 1.4rem;
+	padding: 1rem;
+	background-color: #ecf2f4;
+	border-radius: 0.2rem;
+	border: none;
+}
+
+h2 {
+    text-align: center;
+	margin-bottom: 3rem;
+	font-weight: bold;
+	color: black;
+}
+
+.full-width {
+	width: 100%;
+	-webkit-border-top-right-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	-moz-border-radius-topright: 0;
+	-moz-border-radius-bottomright: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.reg:hover {
+    text-decoration: none;
+}
+
+.btn-submit {
+    background-color: #3371FF;
+    color: white;
+}

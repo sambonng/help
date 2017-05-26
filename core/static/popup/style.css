@@ -1,0 +1,28 @@
+html {
+  position: relative;
+}
+
+.maintable {
+  border-collapse: collapse;
+  border: 1px solid #CCC;
+  width: 1000px;
+  margin: 0 0;
+}
+
+.maintable tr {
+  border: 1px solid #CCC;
+}
+
+#header {
+  padding: 10px 5px;
+}
+
+#title, #search {
+  padding: 10px 20px;
+  vertical-align: center;
+
+}
+
+.inline {
+  display: inline;
+}

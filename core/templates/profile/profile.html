@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>나의 정보</h2>
+<ul>
+    <li>계급: {{ user.profile.get_rank_display }}</li>
+    <li>이름: {{ user.profile.name }}</li>
+    <li>소속: {{ user.profile.department }}</li>
+    <li>직책: {{ user.profile.position }}</li>
+    <li>연락처: {{ user.profile.phone_num }}</li>
+</ul>
+
+<a class="btn btn-default" href="{% url 'profile-update' %}">사용자 정보수정</a>
+<a class="btn btn-default" href="{% url 'profile-change-password' %}">비밀번호 변경</a>
+
+{% endblock %}
